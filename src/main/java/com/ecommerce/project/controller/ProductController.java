@@ -1,6 +1,6 @@
 package com.ecommerce.project.controller;
 
-import com.ecommerce.project.model.Product;
+
 import com.ecommerce.project.payload.ProductDTO;
 import com.ecommerce.project.payload.ProductResponse;
 import com.ecommerce.project.service.ProductService;
@@ -19,9 +19,9 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/admin/categories/{categoryId}/product"  , method = RequestMethod.POST)
-    public ResponseEntity<ProductDTO> addProduct(@RequestBody Product product , @PathVariable Long categoryId){
-          ProductDTO productDTO = productService.addProduct(categoryId , product);
-          return new ResponseEntity<>(productDTO, HttpStatus.CREATED);
+    public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO productDTO , @PathVariable Long categoryId){
+          ProductDTO savedProductDTO = productService.addProduct(categoryId , productDTO);
+          return new ResponseEntity<>(savedProductDTO, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/public/products" , method = RequestMethod.GET)
@@ -43,9 +43,15 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/admin/products/{productId}" , method = RequestMethod.PUT)
-    public ResponseEntity<ProductDTO> updateProduct(@RequestBody Product product , @PathVariable Long productId){
-        ProductDTO updatedProductDTO = productService.updateProduct(productId , product);
+    public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO productDTO , @PathVariable Long productId){
+        ProductDTO updatedProductDTO = productService.updateProduct(productId , productDTO);
         return new ResponseEntity<>(updatedProductDTO , HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/admin/products/{productId}" , method = RequestMethod.DELETE)
+    public ResponseEntity<ProductDTO> deleteProduct(@PathVariable Long productId){
+        ProductDTO deletedProduct = productService.deleteProduct(productId);
+        return new ResponseEntity<>(deletedProduct , HttpStatus.OK);
     }
 
 }

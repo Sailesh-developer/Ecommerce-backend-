@@ -7,7 +7,6 @@ import com.ecommerce.project.payload.CategoryDTO;
 import com.ecommerce.project.payload.CategoryResponse;
 import com.ecommerce.project.repositories.CategoryRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -64,7 +63,7 @@ public class CategoryServiceImpl implements CategoryService {
         categoryResponse.setPageNumber(categoryPage.getNumber());
         categoryResponse.setPageSize(categoryPage.getSize());
         categoryResponse.setTotalElements(categoryPage.getTotalElements());
-        categoryResponse.setTotalpages(categoryPage.getTotalPages());
+        categoryResponse.setTotalPages(categoryPage.getTotalPages());
         categoryResponse.setLastPage(categoryPage.isLast());
         return categoryResponse;
     }

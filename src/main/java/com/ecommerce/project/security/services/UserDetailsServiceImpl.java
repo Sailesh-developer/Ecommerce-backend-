@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ecommerce.project.model.User;
 import com.ecommerce.project.repositories.UserRepository;
 
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     UserRepository userRepository;

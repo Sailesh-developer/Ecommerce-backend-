@@ -33,6 +33,20 @@ public class AddressController {
     @GetMapping("/addresses")
     public ResponseEntity<List<AddressDTO>> getAllAddresses(){
         List<AddressDTO> addresses = addressService.getAddresses();
-        return new ResponseEntity<List<AddressDTO>>(addresses, HttpStatus.OK);
+        return new ResponseEntity<>(addresses, HttpStatus.OK);
     }
+
+    @GetMapping("/addresses/{addressId}")
+    public ResponseEntity<AddressDTO> getAddressById(@PathVariable Long addressId){
+        AddressDTO addressDTO = addressService.getAddressesById(addressId);
+        return new ResponseEntity<>(addressDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/user/addresses")
+    public ResponseEntity<List<AddressDTO>> getUserAddresses(){
+        User user = authUtil.loggedInUser();
+        List<AddressDTO> addresses = addressService.getUserAddresses(user);
+        return new ResponseEntity<>(addresses, HttpStatus.OK);
+    }
+
 }

@@ -32,11 +32,6 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        String uri = request.getRequestURI();
-        if (uri.startsWith("/images/")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
 
         logger.debug("AuthTokenFilter called for URI: {}", request.getRequestURI());
         try {

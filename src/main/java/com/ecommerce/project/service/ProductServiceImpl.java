@@ -205,20 +205,34 @@ public class ProductServiceImpl implements ProductService {
         return modelMapper.map(product , ProductDTO.class);
     }
 
+//    @Override
+//    public ProductDTO updateProductImage(Long productId, MultipartFile image) throws IOException {
+//        Product productFromDb = productRepository.findById(productId)
+//                .orElseThrow(() -> new ResourceNotFoundException("Product" , "productId" , productId));
+//
+//        String fileName = fileService.uploadImage(path , image);
+//
+//        productFromDb.setImage(fileName);
+//
+//        Product updatedProduct = productRepository.save(productFromDb);
+//
+//        return modelMapper.map(updatedProduct, ProductDTO.class);
+//
+//    }
+
     @Override
-    public ProductDTO updateProductImage(Long productId, MultipartFile image) throws IOException {
-        Product productFromDb = productRepository.findById(productId)
-                .orElseThrow(() -> new ResourceNotFoundException("Product" , "productId" , productId));
+    public ProductDTO updateImageUrl(Long productId, String imageUrl) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product", "id", productId));
 
-        String fileName = fileService.uploadImage(path , image);
+        product.setImageUrl(imageUrl);
+        Product saved = productRepository.save(product);
 
-        productFromDb.setImage(fileName);
-
-        Product updatedProduct = productRepository.save(productFromDb);
-
-        return modelMapper.map(updatedProduct, ProductDTO.class);
-
+        return modelMapper.map(saved, ProductDTO.class);
     }
+
+
+
 
 
 }
